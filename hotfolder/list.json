@@ -2,16 +2,19 @@
   {
     "question": "¿Qué palabra empieza por 'C'?",
     "answers": ["Casa", "Oso", "Marioneta", "Gato"],
-    "correct": 1
+    "correct": 1,
+    "type":"ART"
   },
   {
     "question": "¿De qué color es el caballo blanco de santiago?",
     "answers": ["Rojo", "Blanco", "Plata", "No hay caballo"],
-    "correct": 2
+    "correct": 2,
+    "type": "ENT"
   },
   {
     "question": "3+3",
     "answers": ["33", "0", "6", "9"],
-    "correct": 3
+    "correct": 3,
+    "type": "SCI"
   }
 ]

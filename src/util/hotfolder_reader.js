@@ -12,7 +12,8 @@ exports.hotfolderFile = path => {
       const newQuestion = new Question({
         question: element.question,
         answers: element.answers,
-        correct: element.correct
+        correct: element.correct,
+        type: element.type
       });
       newQuestion
         .save()

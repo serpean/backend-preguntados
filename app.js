@@ -3,40 +3,17 @@ const bodyParser = require('express');
 const mongoose = require('mongoose');
 const chokidar = require('chokidar');
 
-const Question = require('./src/models/question');
 const hotfolder = require('./src/util/hotfolder_reader');
+
+const questionRoutes = require('./src/routes/question');
 
 const app = express();
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.get('/api/questions', (req, res, next) => {
-  Question.findRandom({}, {}, { limit: 4 }, function(err, results) {
-    if (err) {
-      console.log(err)
-      return res.status(500).json({"message": "Server error"})
-    }
-    res.status(200).json({ list: results });
-  });
-});
 
-app.post('/api/question', (req, res, next) => {
-  const question = new Question({
-    question: req.body.question,
-    answers: req.body.answers,
-    correct: req.body.correct
-  });
+app.use("/api", questionRoutes)
 
-  question
-    .save()
-    .then(() => {
-      res.status(200).json({ message: 'SAVED' });
-    })
-    .catch(err => {
-      console.log(err);
-      res.status(400).json({ message: 'ERROR' });
-    });
-});
 
 chokidar
   .watch('hotfolder/', { ignored: /(^|[\/\\])\../ })
@@ -59,7 +36,7 @@ mongoose
     { useNewUrlParser: true }
   )
   .then(() => {
-    app.listen(3001);
+    app.listen(5000);
     console.log('Server on! http://localhost:3001/api');
   })
   .catch(err => console.log(err));
